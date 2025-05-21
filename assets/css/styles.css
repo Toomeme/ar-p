@@ -1,0 +1,51 @@
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        /* Initially hide both containers, JS will show the correct one */
+        #ar-container, #fallback-container {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #fallback-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+
+        #fallback-container h1 {
+            color: #d9534f;
+        }
+
+        #fallback-container p {
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        #ar-instructions {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            z-index: 100;
+            text-align: center;
+        }

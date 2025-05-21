@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AR Scavenger Hunt</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- A-Frame CDN -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/styles.css" type="text/css" />
+</head>
+<body>
+
+    <div id="ar-container">
+        <a-scene
+            webxr="requiredFeatures: hit-test, plane-detection, local-floor; optionalFeatures: dom-overlay;"
+            ar-mode-ui="enabled: true"
+            renderer="antialias: true; colorManagement: true;"
+        >
+            <a-entity camera></a-entity>
+            <a-box position="0 0 -1" rotation="0 45 0" color="#4CC3D9" scale="0.2 0.2 0.2"></a-box>
+        </a-scene>
+        <div id="ar-instructions">
+            <p>Tap the "Enter AR" button below to start the experience.</p>
+            <p>Look around to detect surfaces.</p>
+        </div>
+    </div>
+
+    <div id="fallback-container">
+        <h1>AR Not Supported</h1>
+        <p>Unfortunately, your device or browser does not support WebXR Augmented Reality.</p>
+        <p>To experience this scavenger hunt, please try on a modern smartphone (Android or iOS) with a WebXR-compatible browser (e.g., Chrome, Firefox, Safari).</p>
+        <p>Remember to visit this page over <strong>HTTPS</strong>.</p>
+    </div>
+
+    <script type="text/javascript" src="/assets/js/scripts.js"></script>
+
+</body>
+</html>
