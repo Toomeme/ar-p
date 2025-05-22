@@ -1,12 +1,8 @@
-import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from './three_modules/three.module.js';
+import { GLTFLoader } from './three_modules/GLTFLoader.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("scripts.js loaded and DOMContentLoaded fired.");
-    console.log("THREE object:", THREE);
-    console.log("GLTFLoader object:", GLTFLoader);
-
-    // UI Elements (rest of your code)
+    // UI Elements
     const instructionsContainer = document.getElementById('instructions-container');
     const instructionsTextOverlay = document.getElementById('instructions-text-overlay');
     const ispyUI = document.getElementById('ispy-ui');
