@@ -6,87 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <!-- A-Frame CDN -->
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <!-- A-Frame Extras for orbit-controls and other useful components -->
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
+    <!-- GSAP CDN for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
     <link rel="stylesheet" href="./assets/css/styles.css" type="text/css" />
 </head>
 <body>
-<!-- Container for the AR experience -->
-    <div id="ar-container">
-        <a-scene
-            webxr="requiredFeatures: hit-test, plane-detection, local-floor; optionalFeatures: dom-overlay;"
-            ar-mode-ui="enabled: true"
-            renderer="antialias: true; colorManagement: true;"
-            ar-placement-manager
-        >
-            <!-- The camera is automatically handled by WebXR when in AR mode. -->
-            <a-entity camera></a-entity>
 
-            <!-- Reticle for AR placement -->
-            <a-entity id="reticle"
-                geometry="primitive: ring; radiusOuter: 0.1; radiusInner: 0.07"
-                material="color: #00FF00; shader: flat"
-                position="0 0 -3"
-                rotation="-90 0 0"
-                visible="false"
-            ></a-entity>
+    <div id="instructions-container">
+        <div id="instructions-text-overlay"></div>
 
-        </a-scene>
+        <canvas id="three-canvas"></canvas>
 
-        <!-- Instructions for the user once AR is loaded -->
-        <div id="ar-instructions">
-            <p>Tap the "Enter AR" button below to start the experience.</p>
-            <p>Look around to detect surfaces.</p>
-        </div>
-
-        <!-- UI for the AR game (e.g., score, instructions) -->
-        <div id="ar-game-ui">
-            <p>Found: <span id="ar-found-count">0</span> / <span id="ar-total-items">0</span></p>
-            <p id="ar-game-message">Look around to find items!</p>
-        </div>
-    </div>
-
-    <!-- Container for the Fallback "I Spy" experience -->
-    <div id="fallback-container">
-        <!-- This overlay will show the "AR Not Supported" message initially -->
-        <div id="fallback-text-overlay"></div>
-
-        <!-- The A-Frame scene for the I Spy game -->
-        <a-scene id="ispy-scene"
-            renderer="antialias: true; colorManagement: true;"
-            cursor="rayOrigin: mouse"
-        >
-            <!-- Fixed Camera for the I Spy scene -->
-            <a-entity camera position="8 10 8" rotation="-30 45 0"></a-entity>
-
-            <!-- Environment for the I Spy scene -->
-            <a-sky color="#ECECEC"></a-sky>
-            <a-entity environment="preset: forest; ground: flat; groundColor: #555; groundTexture: walk"></a-entity>
-
-            <!-- I Spy Objects (add more as needed) -->
-            <a-box id="ispy-item1" position="-1 0.5 -2" color="#FF0000" scale="0.3 0.3 0.3" class="ispy-item" found-item></a-box>
-            <a-sphere id="ispy-item2" position="1 0.7 -3" color="#00FF00" scale="0.4 0.4 0.4" class="ispy-item" found-item></a-sphere>
-            <a-cylinder id="ispy-item3" position="0 0.3 -1" color="#0000FF" scale="0.2 0.2 0.2" class="ispy-item" found-item></a-cylinder>
-            <a-cone id="ispy-item4" position="-2 0.8 0" color="#FFFF00" scale="0.5 0.5 0.5" class="ispy-item" found-item></a-cone>
-            <a-dodecahedron id="ispy-item5" position="2 0.6 1" color="#FF00FF" scale="0.35 0.35 0.35" class="ispy-item" found-item></a-dodecahedron>
-
-            <!-- Add a light source -->
-            <a-entity light="type: ambient; color: #BBB"></a-entity>
-            <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-1 1 1"></a-entity>
-
-        </a-scene>
-
-        <!-- UI for the I Spy game (e.g., score, instructions) -->
+        <!-- UI for the I Spy game -->
         <div id="ispy-ui">
             <p>Found: <span id="ispy-found-count">0</span> / <span id="ispy-total-items">0</span></p>
             <p>Tap the objects to find them!</p>
         </div>
     </div>
 
-
-    <script src="./assets/js/scripts.js"></script>
+    <script src="./assets/js/scripts.js" type="module"></script>
 
 </body>
 </html>
