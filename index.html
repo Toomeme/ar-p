@@ -13,20 +13,25 @@
     <link rel="stylesheet" href="./assets/css/styles.css" type="text/css" />
 </head>
 <body>
- <!-- Container for the AR experience -->
+<!-- Container for the AR experience -->
     <div id="ar-container">
         <a-scene
             webxr="requiredFeatures: hit-test, plane-detection, local-floor; optionalFeatures: dom-overlay;"
             ar-mode-ui="enabled: true"
             renderer="antialias: true; colorManagement: true;"
+            ar-placement-manager
         >
             <!-- The camera is automatically handled by WebXR when in AR mode. -->
             <a-entity camera></a-entity>
 
-            <!-- A simple object to confirm AR is working -->
-            <a-box position="0 0 -1" rotation="0 45 0" color="#4CC3D9" scale="0.2 0.2 0.2"></a-box>
-
-            <!-- You can add more elements here later -->
+            <!-- Reticle for AR placement -->
+            <a-entity id="reticle"
+                geometry="primitive: ring; radiusOuter: 0.1; radiusInner: 0.07"
+                material="color: #00FF00; shader: flat"
+                position="0 0 -3"
+                rotation="-90 0 0"
+                visible="false"
+            ></a-entity>
 
         </a-scene>
 
@@ -34,6 +39,12 @@
         <div id="ar-instructions">
             <p>Tap the "Enter AR" button below to start the experience.</p>
             <p>Look around to detect surfaces.</p>
+        </div>
+
+        <!-- UI for the AR game (e.g., score, instructions) -->
+        <div id="ar-game-ui">
+            <p>Found: <span id="ar-found-count">0</span> / <span id="ar-total-items">0</span></p>
+            <p id="ar-game-message">Look around to find items!</p>
         </div>
     </div>
 
@@ -47,7 +58,7 @@
             renderer="antialias: true; colorManagement: true;"
             cursor="rayOrigin: mouse"
         >
-            <!-- Camera for the I Spy scene. Controls will be added by JS -->
+            <!-- Fixed Camera for the I Spy scene -->
             <a-entity camera position="8 10 8" rotation="-30 45 0"></a-entity>
 
             <!-- Environment for the I Spy scene -->
@@ -55,11 +66,11 @@
             <a-entity environment="preset: forest; ground: flat; groundColor: #555; groundTexture: walk"></a-entity>
 
             <!-- I Spy Objects (add more as needed) -->
-            <a-box id="item1" position="-1 0.5 -2" color="#FF0000" scale="0.3 0.3 0.3" class="ispy-item" found-item></a-box>
-            <a-sphere id="item2" position="1 0.7 -3" color="#00FF00" scale="0.4 0.4 0.4" class="ispy-item" found-item></a-sphere>
-            <a-cylinder id="item3" position="0 0.3 -1" color="#0000FF" scale="0.2 0.2 0.2" class="ispy-item" found-item></a-cylinder>
-            <a-cone id="item4" position="-2 0.8 0" color="#FFFF00" scale="0.5 0.5 0.5" class="ispy-item" found-item></a-cone>
-            <a-dodecahedron id="item5" position="2 0.6 1" color="#FF00FF" scale="0.35 0.35 0.35" class="ispy-item" found-item></a-dodecahedron>
+            <a-box id="ispy-item1" position="-1 0.5 -2" color="#FF0000" scale="0.3 0.3 0.3" class="ispy-item" found-item></a-box>
+            <a-sphere id="ispy-item2" position="1 0.7 -3" color="#00FF00" scale="0.4 0.4 0.4" class="ispy-item" found-item></a-sphere>
+            <a-cylinder id="ispy-item3" position="0 0.3 -1" color="#0000FF" scale="0.2 0.2 0.2" class="ispy-item" found-item></a-cylinder>
+            <a-cone id="ispy-item4" position="-2 0.8 0" color="#FFFF00" scale="0.5 0.5 0.5" class="ispy-item" found-item></a-cone>
+            <a-dodecahedron id="ispy-item5" position="2 0.6 1" color="#FF00FF" scale="0.35 0.35 0.35" class="ispy-item" found-item></a-dodecahedron>
 
             <!-- Add a light source -->
             <a-entity light="type: ambient; color: #BBB"></a-entity>
@@ -69,7 +80,7 @@
 
         <!-- UI for the I Spy game (e.g., score, instructions) -->
         <div id="ispy-ui">
-            <p>Find the objects! Found: <span id="found-count">0</span></p>
+            <p>Found: <span id="ispy-found-count">0</span> / <span id="ispy-total-items">0</span></p>
             <p>Tap the objects to find them!</p>
         </div>
     </div>

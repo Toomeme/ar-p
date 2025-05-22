@@ -1,4 +1,4 @@
-body {
+   body {
             margin: 0;
             overflow: hidden; /* Prevent scrollbars */
             font-family: sans-serif;
@@ -59,7 +59,7 @@ body {
 
         #ar-instructions {
             position: absolute;
-            bottom: 20px;
+            bottom: 120px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.6);
@@ -83,4 +83,18 @@ body {
             font-size: 1.1em;
             z-index: 10; /* Above the scene, below the initial overlay */
             display: none; /* Hidden until game starts */
+        }
+
+        /* AR Game UI */
+        #ar-game-ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            z-index: 10;
+            display: none; /* Hidden until AR game starts */
         }
