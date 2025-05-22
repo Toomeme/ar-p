@@ -1,7 +1,11 @@
-import * as THREE from './three_modules/three.module.js';
-import { GLTFLoader } from './three_modules/GLTFLoader.js';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("Main scripts.js loaded and DOMContentLoaded fired.");
+    console.log("THREE object:", THREE);
+    console.log("GLTFLoader object:", GLTFLoader); // This should now be a function
+
     // UI Elements
     const instructionsContainer = document.getElementById('instructions-container');
     const instructionsTextOverlay = document.getElementById('instructions-text-overlay');
@@ -49,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mouse = new THREE.Vector2();
 
         // Load Models
-        const loader = new GLTFLoader(); 
+        const loader = new GLTFLoader(); // Use GLTFLoader directly, as it's imported
 
         const modelsToLoad = [
             { id: "ispy-item1", path: "./assets/3d/cube.glb", position: new THREE.Vector3(-1, 0.5, -2), scale: 0.3, color: 0xFF0000 },

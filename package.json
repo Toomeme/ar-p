@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
-"scripts": {
-        "start": "http-server ."
-    },
+  "scripts": {
+    "start": "http-server ."
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
