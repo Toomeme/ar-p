@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Main scripts.js loaded and DOMContentLoaded fired.");
     console.log("THREE object:", THREE);
@@ -169,35 +168,39 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
+                // Store a reference to the object for the onComplete callback
+                const objectToRemove = intersectedObject;
 
                 // Animations (GSAP)
-                gsap.to(intersectedObject.scale, {
+                gsap.to(objectToRemove.scale, {
                     x: 0, y: 0, z: 0,
                     duration: 0.3,
                     ease: "power2.out"
                 });
-                gsap.to(intersectedObject.rotation, {
-                    y: intersectedObject.rotation.y + Math.PI * 2, // Spin 360 degrees
+                gsap.to(objectToRemove.rotation, {
+                    property: 'rotation',
+                    y: objectToRemove.rotation.y + Math.PI * 2, // Spin 360 degrees
                     duration: 0.3,
                     ease: "power2.out",
                     onComplete: () => {
-                        // Optionally remove the object from the scene after animation
-                        scene.remove(intersectedObject);
+                        // Remove the object from the scene after animation
+                        scene.remove(objectToRemove);
                         // Also remove it from the raycaster's intersectable objects array
-                        ispyItems = ispyItems.filter(item => item.uuid !== intersectedObject.uuid);
+                        ispyItems = ispyItems.filter(item => item.uuid !== objectToRemove.uuid);
+
+                        // Update UI and game state after the animation completes
+                        ispyFoundItems++;
+                        ispyFoundCountSpan.textContent = ispyFoundItems;
+                        console.log(`I Spy Item found: ${objectToRemove.userData.id}. Total found: ${ispyFoundItems}`);
+
+                        if (ispyFoundItems === totalIspyItems) {
+                            // Now show the alert, after the animation has finished
+                            alert('Congratulations! You found all the I Spy items!');
+                            isGameRunning = false; // Stop the game
+                            // Optionally reset game or show a completion message
+                        }
                     }
                 });
-
-                // Update UI and game state
-                ispyFoundItems++;
-                ispyFoundCountSpan.textContent = ispyFoundItems;
-                console.log(`I Spy Item found: ${intersectedObject.userData.id}. Total found: ${ispyFoundItems}`);
-
-                if (ispyFoundItems === totalIspyItems) {
-                    alert('Congratulations! You found all the I Spy items!');
-                    isGameRunning = false; // Stop the game
-                    // Optionally reset game or show a completion message
-                }
             }
         }
     };
@@ -216,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         instructionsTextOverlay.innerHTML = instructionsHTML;
         instructionsTextOverlay.style.display = 'flex'; // Show the overlay
 
-        // Add event listeners for the buttons
+        // Add event listeners for the "Play I Spy" button
         const startIspyButton = document.getElementById('start-ispy-game');
         const skipToProjectsButton = document.getElementById('skip-to-projects');
 
